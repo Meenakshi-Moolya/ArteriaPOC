@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import io.appium.java_client.TouchAction;
 import page.IPage;
 
 public class WebControl extends Control {
@@ -30,7 +31,21 @@ public class WebControl extends Control {
 			throwControlActionException(e);
 		}
 	}
-
+	
+	@Override
+	public void pressEnter() throws Exception {
+		try {
+			String msg = String.format("Clicking on %s", this.getControlBasicInfoString());
+			logger.debug(msg);
+			this.waitUntilVisible();
+			this.waitUntilClickable();
+			this.getRawWebElement().sendKeys(Keys.ENTER);
+			logger.debug(String.format("Success in %s", msg));
+		} catch (Exception e) {
+			throwControlActionException(e);
+		}
+	}
+	
 	@Override
 	public void enterText(String text) throws Exception {
 		try {
@@ -151,6 +166,21 @@ public class WebControl extends Control {
 			logger.debug(String.format("Failure in %s", msg));
 		}
 	}
+	
+	@Override
+	public void longPress() throws Exception {
+		String msg = String.format("Scrolling till element - ", this.getControlBasicInfoString());
+		try {
+			logger.debug(msg);
+			TouchAction a = new TouchAction(getAgent().getMobileDriver());
+			a.longPress(getRawWebElement());
+			a.perform();
+			this.getAgent().takeConditionalSnapShot();
+		} catch (Exception e) {
+			logger.debug(String.format("Failure in %s", msg));
+		}
+	}
+
 
 	@Override
 	public void selectDropDownByValue(String value) throws Exception {

@@ -1,12 +1,11 @@
 package core.pages;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Scanner;
 
-import org.testng.Assert;
+import org.openqa.selenium.Keys;
 
 import agent.IAgent;
 import central.Configuration;
@@ -18,319 +17,331 @@ public class HomePage extends FullPage {
 	}
 
 	/**
-	 * This method performs the Sign-Up action
+	 * This method navigates to the HomePage
 	 *
 	 */
-	public void signUp() throws Exception {
-
-		getControl("usernameSignUp").enterText(getTestData().get("username"));
-
-		getControl("passwordSignUp").waitUntilClickable();
-		getControl("passwordSignUp").click();
-
-		getControl("passwordSignUp").enterText(getTestData().get("password"));
-		getControl("registerBtn").click();
-
-		getControl("doneBtnSignUp").waitUntilVisible();
-		getControl("doneBtnSignUp").click();
-
+	public HomePage homePage() throws Exception {
+		this.driver.manage().window().maximize();
+		String text = getControl("verifyhomeTitle").getText();
+		if (text.equals("Log On")) {
+			logger.info("Home page title verified");
+		} else {
+			logger.info("Wrong page");
+		}
+		return new HomePage(getConfig(), getAgent(), getTestData());
 	}
 
 	/**
-	 * This method performs the Login action
+	 * This method performs Login action
 	 *
 	 */
 	public HomePage login() throws Exception {
+		getControl("email").enterText(getTestData().get("username"));
+		getControl("password").enterText(getTestData().get("password"));
+		getControl("login").waitUntilClickable();
+		getControl("login").click();
 
-		try {
-			getControl("passwordSignIn").waitUntilVisible();
-			getControl("passwordSignIn").click();
-
-			getControl("passwordSignIn").enterText("Krishna@2");
-
-			getControl("logInBtn").waitUntilVisible();
-			getControl("logInBtn").click();
-		} catch (Exception e) {
-			signUp();
-		}
 		return new HomePage(getConfig(), getAgent(), getTestData());
 	}
 
 	/**
-	 * This method Starts the Day
+	 * This method navigates to the Order group and then to Order List
 	 *
 	 */
-	public HomePage startDay() throws Exception {
+	public HomePage clickOrders() throws Exception {
+		getControl("orders").waitUntilClickable();
+		getControl("orders").click();
 
-		if (getControl("startDayText").getText().contains("Start")) {
-			getControl("startDayPlayBtn").click();
+		getControl("salesOrderView").waitUntilClickable();
+		getControl("salesOrderView").click();
 
-			getControl("reasonForDayStart").waitUntilVisible();
-			getControl("reasonForDayStart").click();
+		return new HomePage(getConfig(), getAgent(), getTestData());
+	}
 
-			getControl("attendanceSaveBtn").waitUntilVisible();
-			getControl("attendanceSaveBtn").click();
-
+	/**
+	 * This method navigates to Secondary Sales Order Page and verifies the page
+	 *
+	 */
+	public HomePage secondarySalesOrderView() throws Exception {
+		String text = getControl("verifySecondarySalesOrderListPage").getText();
+		if (text.equals("Secondary Sales Order List")) {
+			logger.info("Secondary Sales Order List Page verified");
 		} else {
-			endTheDay();
+			logger.info("Wrong page");
 		}
-		return new HomePage(getConfig(), getAgent(), getTestData());
-	}
-
-	/**
-	 * This method ends the Day
-	 *
-	 */
-	public HomePage endTheVisit() throws Exception {
-
-		Assert.assertEquals(getControl("endDayText").getText(), "End Day");
-
-		getControl("endTheDayPlayBtn").waitUntilVisible();
-		getControl("endTheDayPlayBtn").click();
-
-		getControl("dayEndPopUp").waitUntilVisible();
-		getControl("dayEndPopUp").click();
-
-		getControl("clickOnReason").waitUntilVisible();
-		getControl("clickOnReason").click();
-
-		getControl("reasonVisitEnd").waitUntilVisible();
-		getControl("reasonVisitEnd").click();// Visit end reason
-
-		getControl("remarksVisitEnd").enterText("Hi");
-
-		getControl("saveRemark").waitUntilVisible();
-		getControl("saveRemark").click(); // SAve
-
-		getControl("visitEndPopUp").waitUntilVisible();
-		getControl("visitEndPopUp").click();
 
 		return new HomePage(getConfig(), getAgent(), getTestData());
 	}
 
 	/**
-	 * This method syncs the Data to the server
+	 * This method selects the customer
 	 *
 	 */
-	public HomePage syncData() throws Exception {
+	public HomePage selectCustomer() throws Exception {
+		getControl("customerNoDropdownList").waitUntilClickable();
+		getControl("customerNoDropdownList").click();
 
-		getControl("hamburgerMenu").waitUntilVisible();
-		getControl("hamburgerMenu").click();
-
-		getControl("syncBtn").waitUntilVisible();
-		getControl("syncBtn").click();
-
-		getControl("uploadBtn").waitUntilVisible();
-		getControl("uploadBtn").click();
-
-		getControl("synchroPopUp").waitUntilVisible();
-		getControl("synchroPopUp").click();
-
-		getControl("navigateBackBtn").waitUntilVisible();
-		getControl("navigateBackBtn").click();
+		getControl("selectCustomer").waitUntilClickable();
+		getControl("selectCustomer").click();
 
 		return new HomePage(getConfig(), getAgent(), getTestData());
 	}
 
 	/**
-	 * This method fetches the Order no
+	 * This method selects the Order time
 	 *
 	 */
-	public void fetchingOrderNo() throws Exception {
+	public HomePage selectOrderTime() throws Exception {
+		getControl("orderDateDropdownList").waitUntilClickable();
+		getControl("orderDateDropdownList").click();
 
-		getControl("hamburgerMenu").waitUntilVisible();
-		getControl("hamburgerMenu").click();
+		getControl("selectOrderDate").waitUntilClickable();
+		getControl("selectOrderDate").click();
 
-		getControl("selectRetailer").waitUntilVisible();
-		getControl("selectRetailer").click();// Selecting the Retailers tab
+		return new HomePage(getConfig(), getAgent(), getTestData());
+	}
 
-		getControl("clickOnRetailer").waitUntilVisible();
-		getControl("clickOnRetailer").click(); // click on retailer
+	public String fetchOrderNo() throws FileNotFoundException {
+		String data = null;
 
-		Integer orderNo = Integer.parseInt(getControl("fetchOrderNo").getText()); // fetching Order no.
+		File file = new File("C:/Users/Kshitiz/Desktop/ArteriaData.txt");
+		Scanner sc = new Scanner(file);
 
-		System.out.println(orderNo);
+		while (sc.hasNextLine())
+			data = sc.nextLine();
+
+		System.out.println(data);
+		return data;
 	}
 
 	/**
-	 * This method navigates to back page
+	 * This method fetches the Order No in List Order Page
 	 *
 	 */
-	public void backNavigation() throws Exception {
-		getControl("navigateBackBtn").waitUntilVisible();
-		getControl("navigateBackBtn").click();
+	public HomePage searchOrderNo() throws Exception {
+		getControl("selectOrderNoInListOrder").waitUntilClickable();
+		getControl("selectOrderNoInListOrder").click();
 
+		getControl("selectOrderTextBox").waitUntilClickable();
+		getControl("selectOrderTextBox").click();
+
+		getControl("selectOrderTextBox").enterText(fetchOrderNo());
+
+		getControl("orderSelectGoBtn").waitUntilClickable();
+		getControl("orderSelectGoBtn").click();
+
+		getControl("selectingOrderNo").waitUntilClickable();
+		getControl("selectingOrderNo").click();
+
+		/*
+		 * try { getControl("confirmOrderSelection").click(); } catch (Exception e) {
+		 * getControl("closeTheErrorPopUp").click(); }
+		 */
+
+		return new HomePage(getConfig(), getAgent(), getTestData());
 	}
 
 	/**
-	 * This method end the day
+	 * This method fetches the Order No in Sales Invoice Create Page
 	 *
 	 */
-	public void endTheDay() throws Exception {
+	public HomePage selectOrderNo() throws Exception {
 
-		if (getControl("endDayText").getText().contains("End Day")) {
+		getControl("selectOrderNoTab").waitUntilClickable();
+		getControl("selectOrderNoTab").click();
 
-			logger.info("The day has already started");
+		getControl("selectOrderTextBox").waitUntilClickable();
+		getControl("selectOrderTextBox").click();
 
+		getControl("selectOrderTextBox").enterText(fetchOrderNo());
+
+		getControl("orderSelectGoBtn").waitUntilClickable();
+		getControl("orderSelectGoBtn").click();
+
+		getControl("selectingOrderNo").waitUntilClickable();
+		getControl("selectingOrderNo").click();
+
+		return new HomePage(getConfig(), getAgent(), getTestData());
+	}
+
+	static String soldToParty;
+	static String customer;
+
+	/**
+	 * This method search for the Order details
+	 *
+	 */
+	public HomePage searchSalesOrder() throws Exception {
+
+		searchSalesInvoice();
+
+		getControl("CPNoOKButton").waitUntilClickable();
+		getControl("CPNoOKButton").click();
+
+		searchOrderNo();
+
+		getControl("CPNoOKButton").waitUntilClickable();
+		getControl("CPNoOKButton").click();
+
+		getControl("buttonGo").waitUntilClickable();
+		getControl("buttonGo").click();
+
+		getControl("clickOrderNo").waitUntilClickable();
+		getControl("clickOrderNo").click();
+
+		soldToParty = getControl("getSoldToParty").getText();
+		logger.info(soldToParty);
+
+		customer = getControl("getCustomer").getText();
+		logger.info(customer);
+
+		customer = customer.replaceAll("Customer:", "");
+		logger.info("The Customer for which the Order is created is " + customer);
+
+		customer = customer.replaceAll("\\(.*?\\)", "");
+		soldToParty = soldToParty.replaceAll("\\(.*?\\)", "");
+		logger.info("The Sold to Party for the Order Created is " + soldToParty);
+
+		String orderCreatedDate = getControl("getOrderCreatedDate").getText();
+		logger.info("Order has been created on " + orderCreatedDate);
+
+		return new HomePage(getConfig(), getAgent(), getTestData());
+	}
+
+	/**
+	 * This navigates to Home Page
+	 *
+	 */
+	public HomePage goHome() throws Exception {
+		getControl("goHome").waitUntilClickable();
+		getControl("goHome").click();
+
+		return new HomePage(getConfig(), getAgent(), getTestData());
+	}
+
+	/**
+	 * This method navigates to the Sales Group and then to Sales Invoice page
+	 *
+	 */
+	public HomePage clickSales() throws Exception {
+
+		getControl("sales").waitUntilClickable();
+		getControl("sales").click();
+
+		getControl("secondarySalesInvoiceCreate").waitUntilClickable();
+		getControl("secondarySalesInvoiceCreate").click();
+		Thread.sleep(35000);
+
+		return new HomePage(getConfig(), getAgent(), getTestData());
+	}
+
+	/**
+	 * This method verifies the secondary sales invoice page
+	 *
+	 */
+	public HomePage secondarySalesInvoice() throws Exception {
+		String text = getControl("verifySecondarySalesInvoice").getText();
+		if (text.equals("Create Secondary Sales Invoice")) {
+			logger.info("Create Secondary Sales Invoice Page verified");
 		} else {
-			logger.info("The day cannot be ended");
+			logger.info("Wrong page");
 		}
-	}
-
-	/**
-	 * This method completes the day
-	 *
-	 */
-	public void completeTheDay() throws Exception {
-
-		Assert.assertEquals(getControl("completeTheDayText").getText(), "Day Completed");
-
-		getControl("resetTheDay").waitUntilVisible();
-		getControl("resetTheDay").click();
-
-		getControl("dayEndResetConfrm").waitUntilVisible();
-		getControl("dayEndResetConfrm").click();
-	}
-
-	/**
-	 * This method creates the sales order flow
-	 *
-	 */
-	public HomePage creatingTheSalesOrderFlow() throws Exception {
-
-		getControl("hamburgerMenu").waitUntilVisible();
-		getControl("hamburgerMenu").click();
-
-		getControl("beatPlan").waitUntilVisible();
-		getControl("beatPlan").click();
-
-		getControl("clickOnDropDown").waitUntilVisible();
-		getControl("clickOnDropDown").click();
-
-		getControl("selectDropDown").waitUntilVisible();
-		getControl("selectDropDown").click();
-
-		getControl("selectingRetailer").waitUntilVisible();
-		getControl("selectingRetailer").click();
-
-		getControl("startTheVisit").waitUntilVisible();
-		getControl("startTheVisit").click(); // Start the visit
-
-		getControl("startVisitPopUp").waitUntilVisible();
-		getControl("startVisitPopUp").click(); // Pop-up, Yes / NO
-
-		getControl("startVisitPopUpConfrm").waitUntilVisible();
-		getControl("startVisitPopUpConfrm").click(); // Pop-up, OK
-
-		getControl("salesOrderCreation").waitUntilVisible();
-		getControl("salesOrderCreation").click(); // SO creation
-
-		swipeLeft();
-
-		getControl("qtyInSalesOrder").waitUntilVisible();
-		getControl("qtyInSalesOrder").click(); // clicking on the quantity
-
-		getControl("qtyInSalesOrder").waitUntilVisible();
-		getControl("qtyInSalesOrder").enterText("1");
-
-		getControl("reviewBtnAfterCreation").waitUntilVisible();
-		getControl("reviewBtnAfterCreation").click();
-
-		getControl("saveBtnAfterOrderCreation").waitUntilVisible();
-		getControl("saveBtnAfterOrderCreation").click();
-
-		getControl("saveOrderCreationPopUpConfrm").waitUntilVisible();
-		getControl("saveOrderCreationPopUpConfrm").click(); // Pop-up, OK
-
-		getControl("salesOrderCreatedPopUpConfrm").waitUntilVisible();
-		getControl("salesOrderCreatedPopUpConfrm").click(); // Pop-up, OK
 
 		return new HomePage(getConfig(), getAgent(), getTestData());
 	}
 
 	/**
-	 * This method creates the sales order
+	 * This method verifies the secondary sales invoice page
 	 *
 	 */
-	public HomePage salesOrderFlow() throws Exception {
+	public HomePage selectCustomerNoForInvoice() throws Exception {
+		getControl("customerNoDropdownListInvoice").waitUntilClickable();
+		getControl("customerNoDropdownListInvoice").click();
+
+		getControl("selectCustomerInvoice").waitUntilClickable();
+		getControl("selectCustomerInvoice").click();
+
+		return new HomePage(getConfig(), getAgent(), getTestData());
+	}
+
+	/**
+	 * This method navigates to DMS Division
+	 *
+	 */
+	public HomePage selectDMS_division() throws Exception {
+		getControl("DMSdivisionDropdownList").waitUntilClickable();
+		getControl("DMSdivisionDropdownList").click();
+
+		getControl("selectDMSdivision").waitUntilClickable();
+		getControl("selectDMSdivision").click();
+		Thread.sleep(12000);
+
+		return new HomePage(getConfig(), getAgent(), getTestData());
+	}
+
+	/**
+	 * This method navigates to DMS Division
+	 *
+	 */
+	public HomePage searchSalesInvoice() throws Exception {
+		getControl("selectSoldToParty").waitUntilClickable();
+		getControl("selectSoldToParty").click();
+
+		getControl("enterCPName").waitUntilClickable();
+		getControl("enterCPName").click();
+
+		getControl("enterCPName").enterText("Anirban Stores");
+
+		getControl("CPNoButtonGo").waitUntilClickable();
+		getControl("CPNoButtonGo").click();
+
+		getControl("selectCPNo").waitUntilClickable();
+		getControl("selectCPNo").click();
+
+		return new HomePage(getConfig(), getAgent(), getTestData());
+	}
+
+	/**
+	 * This method inputs the materials and the qty
+	 *
+	 */
+	public HomePage enterMaterialNo() throws Exception {
+		getControl("itemsMenu").waitUntilClickable();
+		getControl("itemsMenu").click();
+
+		getControl("selectQuantity").waitUntilClickable();
+		getControl("selectQuantity").click();
+
+		getControl("selectQuantity").enterText(Keys.DELETE);
+		getControl("selectQuantity").enterText(Keys.DELETE);
+		getControl("selectQuantity").enterText(Keys.DELETE);
+		getControl("selectQuantity").enterText(Keys.DELETE);
+		getControl("selectQuantity").enterText(Keys.DELETE);
+		getControl("selectQuantity").enterText(Keys.DELETE);
+		getControl("selectQuantity").enterText(Keys.DELETE);
+		getControl("selectQuantity").enterText(Keys.DELETE);
+		getControl("selectQuantity").enterText("1");
+
+		getControl("clickOnUnitPriceTab").waitUntilClickable();
+		getControl("clickOnUnitPriceTab").click();
 
 		try {
-			creatingTheSalesOrderFlow();
-			backNavigation();
-			getControl("visitEndPopUp").waitUntilVisible();
-			getControl("visitEndPopUp").click();
+			getControl("clickHeaderDetails").waitUntilClickable();
+			getControl("clickHeaderDetails").click();
 
-			getControl("visitEndConfirmPopUp").waitUntilVisible();
-			getControl("visitEndConfirmPopUp").click();
-
-			backNavigation();
-
-			syncData();
 		} catch (Exception e) {
-			logger.info("There is some issue in creating the Sales Order");
+			scrollUp();
 		}
+
+		getControl("buttonReview").waitUntilClickable();
+		getControl("buttonReview").click();
+
+		getControl("buttonSave").waitUntilClickable();
+		getControl("buttonSave").click();
+
+		String invoice = getControl("invoiceCreationMessage").getText();
+		logger.info(invoice);
+
 		return new HomePage(getConfig(), getAgent(), getTestData());
 	}
-
-	/**
-	 * This method extract order no
-	 *
-	 */
-	public String extractOrderNo(String str) {
-
-		Pattern p = Pattern.compile("\\d+");
-		Matcher m = p.matcher(str);
-		while (m.find()) {
-			System.out.println(m.group());
-			break;
-		}
-		return m.group().replaceAll("^0+", "");
-	}
-
-	/**
-	 * This method fetches Details from log
-	 *
-	 */
-	public HomePage fetchingDetailsFromLog() throws Exception {
-
-		getControl("hamburgerMenu").waitUntilVisible();
-		getControl("hamburgerMenu").click();
-
-		swipeDown();
-
-		getControl("supportLink").waitUntilVisible();
-		getControl("supportLink").click();
-
-		getControl("logView").waitUntilVisible();
-		getControl("logView").click();
-
-		System.out.println(getControls("listOfLogs").size());
-
-		String[] dateAndTimeOfOrder = null;
-		for (int i = 0; i < getControls("listOfLogs").size(); i++) {
-
-			String extractingOrderNo = getControls("listOfLogs").get(i).getText();
-			if (extractingOrderNo.contains(": SO # 00000")) {
-				logger.info(extractingOrderNo);
-				dateAndTimeOfOrder = extractingOrderNo.split(" : ");
-				System.out.println("The latest Order that has been created is " + dateAndTimeOfOrder[1]);
-				System.out.println("Time of the Order created is " + dateAndTimeOfOrder[0]);
-				break;
-			}
-		}
-
-		try {
-			FileWriter writer = new FileWriter("C:/Users/Kshitiz/Desktop/ArteriaData.txt", true);
-
-			writer.write(extractOrderNo(dateAndTimeOfOrder[1]));
-			writer.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return new HomePage(getConfig(), getAgent(), getTestData());
-
-	}
-
 }

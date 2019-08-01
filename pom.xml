@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>arteriaMobile</groupId>
-	<artifactId>arteriaMobile</artifactId>
+	<groupId>arteriaAutomation</groupId>
+	<artifactId>arteriaAutomation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Arteria Mobile Automation Test Project</name>
-	<description>Arteria Mobile Automation Test Project</description>
+	<name>Automation Test Project</name>
+	<description>Automation Test Project</description>
 
 	<properties>
 		<selenium-version>2.53.1</selenium-version>
@@ -19,7 +19,7 @@
 		<maven.build.timestamp.format>yyyy-MM-dd-HH-mm-ss</maven.build.timestamp.format>
 	</properties>
 	<build>
-		<finalName>ArteriaMobileAutomation</finalName>
+		<finalName>AppAchhiAutomation</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

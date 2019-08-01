@@ -1,164 +1,152 @@
 {
-	"usernameSignIn": {
-		"ANDROID": "id=et_login_username"
+	"verifyhomeTitle": {
+		"DESKTOP_WEB": "xpath=//h1[@id='ids-heading-1' and contains(text(),'Log On')]"
 	},
-	"passwordSignIn": {
-		"ANDROID": "id=et_login_password"
+	"email": {
+		"DESKTOP_WEB": "xpath=//input[@placeholder='E-Mail']"
 	},
-	"logInBtn": {
-		"ANDROID": "id=bt_login"
+	"password": {
+		"DESKTOP_WEB": "id=j_password"
 	},
-	"doneBtnSignUp": {
-		"ANDROID": "id=menu_skip"
+	"login": {
+		"DESKTOP_WEB": "xpath=//button[@id='logOnFormSubmit']"
 	},
-	"usernameSignUp": {
-		"ANDROID": "id=et_username"
+	"orders": {
+		"DESKTOP_WEB": "xpath=(//*[text()='Orders'])[1]"
 	},
-	"passwordSignUp": {
-		"ANDROID": "id=et_password"
+	"salesOrderView": {
+		"DESKTOP_WEB": "xpath=(//*[@title='Orders']/following::ul/li/div/a/div/div/div/div/span/span[text()='Sales Order'])[2]"
 	},
-	"registerBtn": {
-		"ANDROID": "id=btRegister"
+	"verifySecondarySalesOrderListPage": {
+		"DESKTOP_WEB": "xpath=//*[text()='Secondary Sales Order List']"
 	},
-	"hamburgerMenu": {
-		"ANDROID": "xpath=//android.widget.ImageButton[@contentDescription='Open navigation drawer' or @content-desc='Open navigation drawer']"
+	"customerNoDropdownList": {
+		"DESKTOP_WEB": "xpath=//label[text()='All']"
 	},
-	"endTheVisit": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
+	"selectCustomer": {
+		"DESKTOP_WEB": "xpath=(//span[@class='sapMSelectListCell sapMSelectListFirstCell'])[2]"
 	},
-	"reasonVisitEnd": {
-		"ANDROID": "xpath=(//android.widget.CheckedTextView[@resource-id='com.arteriatech.ss.msecsales:id/tvItemValue'])[2]"
+	"orderDateDropdownList": {
+		"DESKTOP_WEB": "xpath=//*[@title='Order Date']/following::div/div/label"
 	},
-	"clickOnReason": {
-		"ANDROID": "xpath=//android.widget.TextView[@resource-id='com.arteriatech.ss.msecsales:id/tvItemValue']"
+	"selectOrderDate": {
+		"DESKTOP_WEB": "xpath=//*[text()='Last Seven Days']"
 	},
-	"remarksVisitEnd": {
-		"ANDROID": "id=etRemarks"
+	"buttonGo": {
+		"DESKTOP_WEB": "xpath=//button[@title='Go']/span/span"
 	},
-	"saveRemark": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='com.arteriatech.ss.msecsales:id/btYes']"
+	"clickOrderNo": {
+		"DESKTOP_WEB": "xpath=(//a[@tabindex='0'])[4]"
 	},
-	"selectRetailer": {
-		"ANDROID": "xpath=//android.widget.TextView[@resource-id='com.arteriatech.ss.msecsales:id/icon_text' and @text='Retailers']"
+	"getCustomer": {
+		"DESKTOP_WEB": "xpath=(//span[@id='application-ssso-Display-component---DetailPage--ObjectPageHeader-subtitle'])[2]"
 	},
-	"clickOnRetailer": {
-		"ANDROID": "xpath=//*[@resource-id='com.arteriatech.ss.msecsales:id/tvName']"
+	"getSoldToParty": {
+		"DESKTOP_WEB": "xpath=((//*[text()='Sold To Party'])[1]/following::div/span)[1]"
 	},
-	"fetchOrderNo": {
-		"ANDROID": "xpath=//android.widget.TextView[@resource-id='com.arteriatech.ss.msecsales:id/tvLastOrderNo']"
+	"getOrderNo": {
+		"DESKTOP_WEB": "xpath=//*[contains(text(),'Sales Order : ')]"
 	},
-	"beatPlan": {
-		"ANDROID": "xpath=//*[@text='Beat Plan']"
+	"getOrderCreatedDate": {
+		"DESKTOP_WEB": "xpath=(//*[contains(text(),'Created on')]/following::span)[1]"
 	},
-	"clickOnDropDown": {
-		"ANDROID": "xpath=//android.widget.TextView[@text='Ranchi Bazar' or @id='tvItemValue']"
+	"goHome": {
+		"DESKTOP_WEB": "xpath=//*[@id='homeBtn']"
 	},
-	"selectDropDown": {
-		"ANDROID": "xpath=//android.widget.CheckedTextView[@text='Hebbal Beat']"
+	"sales": {
+		"DESKTOP_WEB": "xpath=//div[text()='Sales']"
 	},
-	"unplannedBeatSection": {
-		"ANDROID": "xpath=//*[@text='UNPLANNED BEAT']"
+	"secondarySalesInvoiceCreate": {
+		"DESKTOP_WEB": "xpath=//*[contains(text(),'Secondary Sales')]/following::div[contains(text(),'Invoice Create')]"
 	},
-	"selectingRetailer": {
-		"ANDROID": "xpath=//android.widget.TextView[@id='tvName' or @text='M']"
+	"verifySecondarySalesInvoice": {
+		"DESKTOP_WEB": "xpath=//*[text()='Create Secondary Sales Invoice']"
 	},
-	"startTheVisit": {
-		"ANDROID": "id=iv_visit_status"
+	"customerNoDropdownListInvoice": {
+		"DESKTOP_WEB": "xpath=(//label[contains(.,'(Select)')])[1]"
 	},
-	"startVisitPopUp": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
+	"selectCustomerInvoice": {
+		"DESKTOP_WEB": "xpath=(//span[@class='sapMSelectListCell sapMSelectListFirstCell'])[2]"
 	},
-	"startVisitPopUpConfrm": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
+	"DMSdivisionDropdownList": {
+		"DESKTOP_WEB": "xpath=(//*[text()='(Select)'])[3]"
 	},
-	"salesOrderCreation": {
-		"ANDROID": "id=ib_so_create_selection"
+	"selectDMSdivision": {
+		"DESKTOP_WEB": "xpath=//*[text()='00 - Consumer Care Division']"
 	},
-	"qtyInSalesOrder": {
-		"ANDROID": "id=etQty"
+	"selectSoldToParty": {
+		"DESKTOP_WEB": "xpath=(//*[text()='Sold To Party']/following::div/div/div/div/div[3]/span)[1]"
 	},
-	"reviewBtnAfterCreation": {
-		"ANDROID": "id=menu_next"
+	"enterCPName": {
+		"DESKTOP_WEB": "xpath=(//*[text()='CP Name']/following::input)[1]"
 	},
-	"saveBtnAfterOrderCreation": {
-		"ANDROID": "id=menu_save"
+	"CPNoButtonGo": {
+		"DESKTOP_WEB": "xpath=(//button[@title='Go']/span/span)[1]"
 	},
-	"saveOrderCreationPopUpConfrm": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
+	"CPNoOKButton": {
+		"DESKTOP_WEB": "xpath=//bdi[contains(.,'OK')]"
 	},
-	"salesOrderCreatedPopUpConfrm": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
+	"selectCPNo": {
+		"DESKTOP_WEB": "xpath=(//div[contains(@id,'tableCCnt')]/div/div/table/tbody/tr/td[2]/div/span)[1]"
 	},
-	"navigateBackBtn": {
-		"ANDROID": "xpath=//android.widget.ImageButton[@content-desc='Navigate up']"
+	"selectOrderNoInListOrder": {
+		"DESKTOP_WEB": "xpath=//span[contains(@data-sap-ui,'application-ssso-Display-component---ListPage--ListView--inputOrderNo-vhi')]"
 	},
-	"visitEndPopUp": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
+	"selectOrderNoTab": {
+		"DESKTOP_WEB": "xpath=//span[contains(@data-sap-ui,'__create0-Collapsed--FOrderNoID-vhi')]"
 	},
-	"syncBtn": {
-		"ANDROID": "xpath=(//android.widget.TextView[@resource-id='com.arteriatech.ss.msecsales:id/icon_text'])[11]"
+	"selectOrderTextBox": {
+		"DESKTOP_WEB": "xpath=(//input[@type='text'])[1]"
 	},
-	"uploadBtn": {
-		"ANDROID": "xpath=(//android.widget.ImageView[@resource-id='com.arteriatech.ss.msecsales:id/ib_must_sell'])[3]"
+	"orderSelectGoBtn": {
+		"DESKTOP_WEB": "xpath=//button[@title='Go']/span/span"
 	},
-	"synchroPopUp": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
+	"orderNoTable": {
+		"DESKTOP_WEB": "xpath=(//*[text()='Order No'])[2]"
 	},
-	"startDayText": {
-		"ANDROID": "id=tv_day_start_text"
+	"sortFilter": {
+		"DESKTOP_WEB": "xpath=(//div[contains(.,'Sort Descending')])[3]"
 	},
-	"startDayPlayBtn": {
-		"ANDROID": "id=iv_day_start_action"
+	"selectingOrderNo": {
+		"DESKTOP_WEB": "xpath=//div[@title='Click to Select']"
 	},
-	"reasonForDayStart": {
-		"ANDROID": "xpath=//android.widget.Button[@text='FIELD WORK']"
+	"confirmOrderSelection": {
+		"DESKTOP_WEB": "xpath=(//span[contains(.,'OK')])[2]"
 	},
-	"attendanceSaveBtn": {
-		"ANDROID": "id=menu_attendance_save"
+	"closeTheErrorPopUp": {
+		"DESKTOP_WEB": "xpath=//bdi[contains(.,'Close')]"
 	},
-	"endDayText": {
-		"ANDROID": "id=tv_day_start_text"
+	"itemsMenu": {
+		"DESKTOP_WEB": "xpath=(//*[@role='menuitemradio'])[2]"
 	},
-	"endTheDayPlayBtn": {
-		"ANDROID": "id=iv_day_start_action"
+	"removeTheMaterial": {
+		"DESKTOP_WEB": "xpath=(//span[contains(.,'sys-cancel')])[1]"
 	},
-	"dayEndPopUp": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
+	"selectMaterialNo": {
+		"DESKTOP_WEB": "xpath=(//*[text()='Material No']/following::div/div/div/div/div[3]/span)[1]"
 	},
-	"dayEndRemarksPopUp": {
-		"ANDROID": "xpath=//android.widget.TextView[@resource-id='com.arteriatech.ss.msecsales:id/tvItemValue']"
+	"materialsButtonGo": {
+		"DESKTOP_WEB": "xpath=//button[@title='Go']/span/span"
 	},
-	"dayEndReason": {
-		"ANDROID": "xpath=(//android.widget.CheckedTextView[@resource-id='com.arteriatech.ss.msecsales:id/tvItemValue'])[2]"
+	"selectMaterials": {
+		"DESKTOP_WEB": "xpath=((//*[text()='Material No'])[2]/following::div)[7]/span"
 	},
-	"dayEndRemarks": {
-		"ANDROID": "xpath=//*[@resource-id='com.arteriatech.ss.msecsales:id/etRemarks' or @id='etRemarks']"
+	"selectQuantity": {
+		"DESKTOP_WEB": "xpath=(//div[contains(@title,'Quantity')]/div/input)[1]"
 	},
-	"dayEndRemarksSave": {
-		"ANDROID": "xpath=//*[@resource-id='com.arteriatech.ss.msecsales:id/btYes' or @text='SAVE']"
+	"clickOnUnitPriceTab": {
+		"DESKTOP_WEB": "xpath=//*[@title='Unit Price']"
 	},
-	"dayEndConfirmPopUp": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
+	"clickHeaderDetails": {
+		"DESKTOP_WEB": "xpath=(//*[text()='HEADER DETAILS'])[3]"
 	},
-	"visitEndConfirmPopUp": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
+	"buttonReview": {
+		"DESKTOP_WEB": "xpath=//*[text()='Review']"
 	},
-	"completeTheDayText": {
-		"ANDROID": "id=tv_day_start_text"
+	"buttonSave": {
+		"DESKTOP_WEB": "xpath=//*[text()='Save']"
 	},
-	"resetTheDay": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
-	},
-	"dayEndResetConfrm": {
-		"ANDROID": "xpath=//android.widget.Button[@resource-id='android:id/button1']"
-	},
-	"supportLink": {
-		"ANDROID": "xpath=//android.widget.TextView[@text='Support']"
-	},
-	"logView": {
-		"ANDROID": "xpath=//*[@resource-id='com.arteriatech.ss.msecsales:id/icon_text']"
-	},
-	"listOfLogs": {
-		"ANDROID": "xpath=//*[@resource-id='android:id/list']//*[@resource-id='com.arteriatech.ss.msecsales:id/tv_log_msg']"
+	"invoiceCreationMessage": {
+		"DESKTOP_WEB": "xpath=//*[contains(text(),'Invoice Ref No')]"
 	}
 }

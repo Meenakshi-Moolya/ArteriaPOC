@@ -16,15 +16,23 @@ import agent.AgentFactory;
 import agent.IAgent;
 import central.AppachhiCentral;
 import central.Configuration;
+import core.pages.Arteria;
+import core.pages.Arteria_Create_SalesInvoice;
+import core.pages.Arteria_View_Orders;
+
 import core.pages.HomePage;
 
 public class SupportTest {
 	protected static Logger logger = AppachhiCentral.getLogger();
 	private Configuration conf = null;
+	// protected LoginPage login;
+	public HomePage hp;
 	private IAgent agent;
+	protected Arteria arteria;
+	protected Arteria_View_Orders arteria_orders;
+	protected Arteria_Create_SalesInvoice arteria_salesInvoice;
 	private ITestContext context = null;
 	private String testName = null;
-	protected HomePage hp;
 
 	@BeforeSuite(alwaysRun = true)
 	public void runOncePerSuite() throws Exception {
@@ -54,8 +62,14 @@ public class SupportTest {
 		agent = AgentFactory.createAgent(this.conf);
 		logger.debug(String.format("Test Method Name Started :: %s", testName));
 		Map<String, String> testData = AppachhiCentral.INSTANCE.getTestData(context, testName);
-		// lp= new LoginPage(conf, agent, testData);
 		hp = new HomePage(conf, agent, testData);
+		// blp= new BakasuraLoginPage(conf, agent, testData);
+		// editStock = new Edit_Stock(conf, agent, testData);
+		// arteria = new Arteria(conf, agent, testData);
+		arteria_orders = new Arteria_View_Orders(conf, agent, testData);
+		// arteria_salesInvoice = new Arteria_Create_SalesInvoice(conf, agent,
+		// testData);
+		// lp= new LoginPage(conf, agent, testData);
 		logger.info(String.format("Set up for test method [%s] ended.", testName));
 	}
 
